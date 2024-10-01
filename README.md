@@ -19,7 +19,7 @@
 - 배송 정보와 결제 정보 입력 후 주문 완료 페이지로 연결
 
 ### 색상
-- **주요 색상**: <span style="background-color:#32CD32; color:white; padding:5px;">#32CD32</span> 
+- **주요 색상**: #32CD32
   - Font: **Noto Sans**
-- **배경 색상**: <span style="background-color:#F5F5F5; color:black; padding:5px;">#F5F5F5</span> 
+- **배경 색상**: #F5F5F5
   - Font: **Arial**
