@@ -10,7 +10,7 @@ const register = async (req, res) => {
   const hashedPassword = key.toString('base64');
 
   try {
-    const newUser = await User.createUser(email, username, hashedPassword, salt);
+    const newUser = await User.createUser(username, email, hashedPassword, salt);
     res.status(StatusCodes.CREATED).json(newUser);
   } catch (error) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
