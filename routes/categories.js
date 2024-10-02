@@ -23,6 +23,4 @@ router.get('/:category-id/books', (req, res) => {
 
 });
 
-module.exports = {
-  router
-}
+module.exports = router;

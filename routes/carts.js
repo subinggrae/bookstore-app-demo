@@ -19,6 +19,4 @@ router.delete('/:userId/items/:itemId', (req, res) => {
 
 });
 
-module.exports = {
-  router
-}
+module.exports = router;
