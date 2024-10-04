@@ -1,25 +1,23 @@
 const express = require('express');
 const router = express.Router();
+const categoryValidator = require('../validators/categoryValidator');
+const categoryController = require('../controllers/categoryController');
 
 router.use(express.json());
 
-router.post('/', (req, res) => {
+router.post('/', categoryValidator.createCategoryValidation, categoryController.handleCreateCategory);
 
-});
+router.get('/', categoryController.handleGetAllCategories);
 
-router.get('/', (req, res) => {
+router.put('/:id', categoryValidator.updateCategoryValidation, categoryController.handleUpdateCategory);
 
-});
+router.delete('/:id', categoryValidator.deleteCategoryValidation, categoryController.handleDeleteCategory);
 
-router.put('/:category-id', (req, res) => {
+router.get('/test', (req, res) => {
+  res.send('test');
+})
 
-});
-
-router.delete('/:category-id', (req, res) => {
-
-});
-
-router.get('/:category-id/books', (req, res) => {
+router.get('/:id/books', (req, res) => {
 
 });
 
