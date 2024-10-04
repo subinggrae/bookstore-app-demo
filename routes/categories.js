@@ -13,12 +13,6 @@ router.put('/:id', categoryValidator.updateCategoryValidation, categoryControlle
 
 router.delete('/:id', categoryValidator.deleteCategoryValidation, categoryController.handleDeleteCategory);
 
-router.get('/test', (req, res) => {
-  res.send('test');
-})
-
-router.get('/:id/books', (req, res) => {
-
-});
+router.get('/:id/books', categoryController.handleGetBooksByCategory);
 
 module.exports = router;

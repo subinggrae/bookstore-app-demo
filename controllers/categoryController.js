@@ -1,4 +1,5 @@
 const Category = require('../models/Category');
+const Book = require('../models/Book');
 const { StatusCodes } = require('http-status-codes');
 
 const handleCreateCategory = async (req, res) => {
@@ -57,9 +58,21 @@ const handleDeleteCategory = async (req, res) => {
   res.status(StatusCodes.OK).end();
 }
 
+const handleGetBooksByCategory = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const books = await Book.findBooksByCategoryId(id);
+    return res.status(StatusCodes.OK).json(books);
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
+  }
+}
+
 module.exports = {
   handleCreateCategory,
   handleDeleteCategory,
   handleGetAllCategories,
-  handleUpdateCategory
+  handleUpdateCategory,
+  handleGetBooksByCategory
 }
