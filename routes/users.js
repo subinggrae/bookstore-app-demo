@@ -5,7 +5,7 @@ const userController = require('../controllers/userController');
 
 router.use(express.json());
 
-router.post('/', userValidator.registerValidator, userController.register);
+router.post('/', userValidator.registerValidation, userController.handleCreateUser);
 
 router.delete('/', (req, res) => {
   

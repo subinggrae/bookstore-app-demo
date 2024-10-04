@@ -1,4 +1,3 @@
-
 const User = require('../models/User');
 const crypto = require('crypto');
 const { StatusCodes } = require('http-status-codes');
@@ -7,7 +6,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const login = async (req, res) => {
+const handleLogin = async (req, res) => {
   const { email, password } = req.body;
   let user;
 
@@ -22,11 +21,8 @@ const login = async (req, res) => {
   }
 
   const salt = user.salt;
-  console.log(user);
   const key = crypto.pbkdf2Sync(password, salt, 10000, 64, 'sha512');
   const hashedPassword = key.toString('base64');
-
-  console.log(hashedPassword);
 
   if (hashedPassword !== user.password) {
     return res.status(StatusCodes.UNAUTHORIZED).end();
@@ -45,5 +41,5 @@ const login = async (req, res) => {
 }
 
 module.exports = {
-  login
+  handleLogin
 }

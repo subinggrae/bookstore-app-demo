@@ -2,7 +2,7 @@ const User = require('../models/User');
 const crypto = require('crypto');
 const { StatusCodes } = require('http-status-codes');
 
-const register = async (req, res) => {
+const handleCreateUser = async (req, res) => {
   const { email, username, password } = req.body;
 
   const salt = crypto.randomBytes(64).toString('base64');
@@ -11,12 +11,12 @@ const register = async (req, res) => {
 
   try {
     const newUser = await User.createUser(username, email, hashedPassword, salt);
-    res.status(StatusCodes.CREATED).json(newUser);
+    return res.status(StatusCodes.CREATED).json(newUser);
   } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
   }
 }
 
 module.exports = {
-  register
+  handleCreateUser
 }

@@ -5,7 +5,7 @@ const authValidator = require('../validators/authValidator');
 
 router.use(express.json());
 
-router.post('/login', authValidator.loginValidator, authController.login);
+router.post('/login', authValidator.loginValidation, authController.handleLogin);
 
 router.delete('/logout', (req, res) => {
 

@@ -1,7 +1,7 @@
 const { body } = require('express-validator');
 const { validateRequest } = require('./validateRequest');
 
-const loginValidator = [
+const loginValidation = [
   body('email')
     .notEmpty()
     .withMessage('이메일을 입력해주세요.'),
@@ -12,5 +12,5 @@ const loginValidator = [
 ];
 
 module.exports = {
-  loginValidator
+  loginValidation
 }

@@ -1,7 +1,7 @@
 const { body } = require('express-validator');
 const { validateRequest } = require('./validateRequest');
 
-const validateConfirmPassword = (confirmPassword, { req }) => {
+const comparePasswordTo = (confirmPassword, { req }) => {
   const password = req.body.password;
 
   if (password !== confirmPassword) {
@@ -11,7 +11,7 @@ const validateConfirmPassword = (confirmPassword, { req }) => {
   return true;
 }
 
-const registerValidator = [
+const registerValidation = [
   body('email')
     .isEmail()
     .withMessage('이메일 형식을 입력해주세요.'),
@@ -26,10 +26,10 @@ const registerValidator = [
     .matches(/^[A-Za-z\d!@#$%^&*]+$/)
     .withMessage('비밀번호는 영문 대/소문자, 숫자, 특수문자만 입력해주세요.'),
   body('confirmPassword')
-    .custom(validateConfirmPassword),
+    .custom(comparePasswordTo),
   validateRequest
 ]
 
 module.exports = {
-  registerValidator
+  registerValidation
 }
