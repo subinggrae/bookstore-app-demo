@@ -60,11 +60,13 @@ const handleDeleteCategory = async (req, res) => {
 
 const handleGetBooksByCategory = async (req, res) => {
   const { id } = req.params;
+  const { limit, page, sort } = req.query;
 
   try {
-    const books = await Book.findBooksByCategoryId(id);
+    const books = await Book.findBooksByCategoryId(parseInt(id), parseInt(limit), page - 1, sort);
     return res.status(StatusCodes.OK).json(books);
   } catch (error) {
+    console.log(error);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
   }
 }
