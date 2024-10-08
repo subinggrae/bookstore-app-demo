@@ -30,10 +30,6 @@ const findBooksByCategoryId = async (id, limit, page,  sort) => {
   return rows;
 }
 
-const findNewBooks = async () => {
-
-}
-
 module.exports = {
   findAllBooks,
   findBooksByCategoryId,

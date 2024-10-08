@@ -12,6 +12,7 @@ const categoryRouter = require('./routes/categories');
 const bookRouter = require('./routes/books');
 const cartRouter = require('./routes/carts');
 const orderRouter = require('./routes/orders');
+const reviewRouter = require('./routes/reviews');
 
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
@@ -19,3 +20,4 @@ app.use('/categories', categoryRouter);
 app.use('/books', bookRouter);
 app.use('/carts', cartRouter);
 app.use('/orders', orderRouter);
+app.use('/reviews', reviewRouter);
