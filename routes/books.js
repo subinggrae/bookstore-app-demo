@@ -20,4 +20,6 @@ router.delete('/:id', (req, res) => {
 
 });
 
+router.get('/:id/reviews', bookController.handleGetReview);
+
 module.exports = router;

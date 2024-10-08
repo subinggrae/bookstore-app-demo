@@ -1,4 +1,5 @@
 const Book = require('../models/Book');
+const Review = require('../models/Review');
 const { StatusCodes } = require('http-status-codes');
 
 const handleGetAllBooks = async (req, res) => {
@@ -27,7 +28,20 @@ const handleGetBook = async (req, res) => {
   res.status(StatusCodes.OK).json(book);
 }
 
+const handleGetReview = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const reviews = await Review.findReviewsByBookId(id);
+    res.status(StatusCodes.OK).json(reviews);
+  } catch (error) {
+    console.log(error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
+  }
+}
+
 module.exports = {
   handleGetAllBooks,
-  handleGetBook
+  handleGetBook,
+  handleGetReview
 }
