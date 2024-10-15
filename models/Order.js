@@ -21,15 +21,24 @@ const createOrderItem = async (orderId, items) => {
   let fields = [];
 
   items.forEach((item) => {
-    fields.push([orderId, item.bookId, item.quantity]);
+    fields.push([orderId, item.book_id, item.quantity]);
   });
 
   const [result] = await db.query(sql, [fields]);
   return result.affectedRows;
 }
 
+const findOrderById = async (id) => {
+  let sql = 'SELECT o.book_id, title, author, price, quantity FROM `order_item` AS o LEFT JOIN book AS b ON o.book_id = b.id WHERE o.id = ?';
+  let fields = [id];
+
+  const [rows] = await db.query(sql, fields);
+  return rows.length ? rows : null;
+}
+
 module.exports = {
   createDelivery,
   createOrder,
-  createOrderItem
+  createOrderItem,
+  findOrderById
 }
