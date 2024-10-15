@@ -21,17 +21,12 @@ const findItemsByUserId = async (userId) => {
   return rows;
 }
 
-const findSelectedItemsByUserId = async (userId, selected) => {
-  let sql = `
-    SELECT cart_item.id, book_id, title, summary, quantity, price
-    FROM cart_item LEFT JOIN book 
-    ON cart_item.book_id = book.id 
-    WHERE user_id = ? AND cart_item.id IN (?)
-  `;
-  let fields = [userId, selected];
+const findSelectedItemsByUserId = async (selected) => {
+  let sql = 'SELECT book_id, quantity FROM cart_item WHERE cart_item.id IN (?)';
+  let fields = [selected];
 
   const [rows] = await db.query(sql, fields);
-  return rows;
+  return rows.length ? rows : null;
 }
 
 const deleteItemById = async (id) => {
@@ -42,9 +37,18 @@ const deleteItemById = async (id) => {
   return result.affectedRows;
 }
 
+const deleteSelectedItems = async (selected) => {
+  let sql = 'DELETE FROM cart_item WHERE cart_item.id IN (?)';
+  let fields = [selected];
+
+  const [result] = await db.query(sql, fields);
+  return result.affectedRows;
+}
+
 module.exports = {
   createItem,
   findItemsByUserId,
   findSelectedItemsByUserId,
-  deleteItemById
+  deleteItemById,
+  deleteSelectedItems
 }
