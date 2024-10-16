@@ -3,7 +3,8 @@ const Cart = require('../models/Cart');
 const { StatusCodes } = require('http-status-codes');
 
 const handleCreateOrder = async (req, res) => {
-  const { items, delivery, totalPrice, userId } = req.body;
+  const userId = req.userId;
+  const { items, delivery, totalPrice } = req.body;
 
   try {
     let deliveryId = await Order.createDelivery(delivery.address, delivery.reciever, delivery.contact);

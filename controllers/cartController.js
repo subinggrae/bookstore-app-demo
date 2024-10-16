@@ -2,7 +2,7 @@ const Cart = require('../models/Cart');
 const { StatusCodes } = require('http-status-codes');
 
 const handleCreateItem = async (req, res) => {
-  const { userId } = req.params;
+  const userId = req.userId;
   const { bookId, quantity } = req.body;
 
   let createRows = 0;
@@ -20,7 +20,7 @@ const handleCreateItem = async (req, res) => {
 }
 
 const handleGetItems = async (req, res) => {
-  const { userId } = req.params;
+  const userId = req.userId;
 
   try {
     const items = await Cart.findItemsByUserId(userId);

@@ -29,14 +29,13 @@ const handleLogin = async (req, res) => {
   }
 
   const token = jwt.sign({
-    email: email,
-    username: user.username
+    id: user.id
   }, process.env.PRIVATE_KEY, {
     expiresIn: '5m',
     issuer: 'subin'
   });
 
-  res.setHeader('Authorization', `Bearer ${token}`);
+  res.cookie('accessToken', `${token}`);
   res.status(StatusCodes.OK).json(user);
 }
 

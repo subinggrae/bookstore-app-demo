@@ -3,7 +3,8 @@ const Review = require('../models/Review');
 
 
 const handleCreateReview = async (req, res) => {
-  const { userId, bookId, content, rating } = req.body;
+  const userId = req.userId;
+  const { bookId, content, rating } = req.body;
 
   let updateRows = 0;
   try {
