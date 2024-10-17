@@ -16,8 +16,8 @@ const findBookById = async (id) => {
 }
 
 const findBooksByCategoryId = async (id, limit, page,  sort) => {
-  let sql = 'SELECT * FROM book WHERE category_id = ?';
-  const fields = [id];
+  let sql = 'SELECT SQL_CALC_FOUND_ROWS * FROM book WHERE category_id = ?';
+  let fields = [id];
 
   if (sort === 'newest') {
     sql += ' ORDER BY book.published_at DESC';
@@ -26,8 +26,23 @@ const findBooksByCategoryId = async (id, limit, page,  sort) => {
   sql += ' LIMIT ? OFFSET ?'
   fields.push(limit, page);
 
-  const [rows] = await db.query(sql, fields);
-  return rows;
+  const [books] = await db.query(sql, fields);
+
+  sql = 'SELECT FOUND_ROWS()';
+  const [rows] = await db.query(sql);
+
+  console.log(rows);
+
+  const response = {};
+  const pagination = {};
+
+  pagination.totalCount = rows[0]['FOUND_ROWS()'];
+  pagination.currentPage = page + 1;
+
+  response.books = books;
+  response.pagination = pagination;
+
+  return response;
 }
 
 module.exports = {

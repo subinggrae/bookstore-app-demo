@@ -63,8 +63,8 @@ const handleGetBooksByCategory = async (req, res) => {
   const { limit, page, sort } = req.query;
 
   try {
-    const books = await Book.findBooksByCategoryId(parseInt(id), parseInt(limit), page - 1, sort);
-    return res.status(StatusCodes.OK).json(books);
+    const booksPage = await Book.findBooksByCategoryId(parseInt(id), parseInt(limit), page - 1, sort);
+    return res.status(StatusCodes.OK).json(booksPage);
   } catch (error) {
     console.log(error);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).end();
